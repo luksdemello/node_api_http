@@ -1,6 +1,7 @@
 import { Database } from "./database.js"
 import { buildRoutePath } from "./utils/buildRoutePath.js"
 import { randomUUID } from 'node:crypto'
+import {  getTasksByCsv } from "./utils/getTasksByCsv.js";
 
 
 const database = new Database();
@@ -38,9 +39,12 @@ export const routes = [
   {
     method: 'POST',
     path: buildRoutePath('/tasks/upload'),
-    handler: (req, res) => {
-      console.log(req.body);
-      
+    handler: async (req, res) => {
+      const tasks = await getTasksByCsv();
+    
+      for (const task of tasks) {
+        database.insert('tasks', task)
+      }
 
       res.writeHead(201).end()
     }
