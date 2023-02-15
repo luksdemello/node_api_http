@@ -46,8 +46,6 @@ export const routes = [
         description: search
       } : null)
 
-      console.log(tasks)
-
       return res.end(JSON.stringify(tasks))
     }
   },
@@ -87,14 +85,34 @@ export const routes = [
     method: 'PATCH',
     path: buildRoutePath('/tasks/:id/complete'),
     handler: (req, res) => {
-      return res.end(JSON.stringify(''))
+      const { id } = req.params;
+
+      const task = database.select('tasks', { id })[0]
+
+      if (!task) {
+        res.writeHead(404).end(JSON.stringify({message: 'Task not found'}))
+      }
+
+      database.update('tasks', id, {
+        title: task.title,
+        description: task.description,
+        completed_at: task.completed_at ?? new Date(),
+        created_at: task.created_at,
+        updated_at: new Date(0)
+      })
+
+      res.writeHead(204).end()
     }
   },
   {
     method: 'DELETE',
     path: buildRoutePath('/tasks/:id'),
     handler: (req, res) => {
-      return res.end(JSON.stringify(''))
+      const {id} = req.params
+
+      database.delete('tasks', id)
+
+      res.writeHead(204).end()
     }
   }
 ]
