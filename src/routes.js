@@ -1,37 +1,38 @@
+import { buildRoutePath } from "./utils/buildRoutePath.js"
 
 
 export const routes = [
   {
     method: 'POST',
-    path: '/tasks',
+    path: buildRoutePath('/tasks'),
     handler: (req, res) => {
       return res.end(JSON.stringify(''))
     }
   },
   {
     method: 'GET',
-    path: '/tasks',
+    path: buildRoutePath('/tasks'),
     handler: (req, res) => {
       return res.end(JSON.stringify(''))
     }
   },
   {
     method: 'PUT',
-    path: '/tasks/:id',
+    path: buildRoutePath('/tasks/:id'),
     handler: (req, res) => {
       return res.end(JSON.stringify(''))
     }
   },
   {
     method: 'PATCH',
-    path: '/tasks/:id/complete',
+    path: buildRoutePath('/tasks/:id/complete'),
     handler: (req, res) => {
       return res.end(JSON.stringify(''))
     }
   },
   {
     method: 'DELETE',
-    path: '/tasks/:id',
+    path: buildRoutePath('/tasks/:id'),
     handler: (req, res) => {
       return res.end(JSON.stringify(''))
     }
