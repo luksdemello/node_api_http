@@ -36,6 +36,16 @@ export const routes = [
     }
   },
   {
+    method: 'POST',
+    path: buildRoutePath('/tasks/upload'),
+    handler: (req, res) => {
+      console.log(req.body);
+      
+
+      res.writeHead(201).end()
+    }
+  },
+  {
     method: 'GET',
     path: buildRoutePath('/tasks'),
     handler: (req, res) => {
